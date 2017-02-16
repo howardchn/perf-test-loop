@@ -64,10 +64,10 @@ namespace LoopTest
 
         public override void RunTest()
         {
-            //List<T> data = new List<T>();
+            List<T> data = new List<T>();
             //ArrayList data = new ArrayList();
 
-            Collection<T> data = new Collection<T>();
+            //Collection<T> data = new Collection<T>();
             for (int i = 0; i < maximumDataCount; i++)
             {
                 data.Add((T)CreateData());
