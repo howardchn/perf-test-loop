@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -58,15 +60,26 @@ namespace LoopTest
 
     public class PerformanceResult<T> : PerformanceResult
     {
+        static int maximumDataCount = 10000000;
+
         public override void RunTest()
         {
-            List<T> data = new List<T>();
-            for (int i = 0; i < 10000000; i++)
+            //List<T> data = new List<T>();
+            //ArrayList data = new ArrayList();
+
+            Collection<T> data = new Collection<T>();
+            for (int i = 0; i < maximumDataCount; i++)
             {
                 data.Add((T)CreateData());
             }
-            int count;
 
+            //T[] data = new T[maximumDataCount];
+            //for (int i = 0; i < maximumDataCount; i++)
+            //{
+            //    data[i] = (T)CreateData();
+            //}
+
+            int count;
             Stopwatch sw = new Stopwatch();
 
             long total = 0;
@@ -95,7 +108,7 @@ namespace LoopTest
                 sw.Reset();
                 sw.Start();
                 count = 0;
-                IEnumerator<T> enumerator = data.GetEnumerator();
+                IEnumerator enumerator = data.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
                     var temp = enumerator.Current;
